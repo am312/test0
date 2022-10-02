@@ -5,14 +5,18 @@ on:
     types: [published]
 env:
   VERSION: ${{ github.event.release.name }}
+  REF: ${{ github.ref_name }}
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "$GITHUB_REF_NAME"
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "rel name ${{ github.event.release.name }}"
       - run: echo "event ref= ${{ github.event.ref }}"
-      - run: echo "event ref-type= ${{ github.event.ref_type }}"
+      - run: echo "event ref-name= ${{ github.event.ref_name }}"
+      - run: echo "event ref-type= ${{ github.ref_type }}"
+      - run: echo "event ref-type= ${{ github.event.master_branch }}"
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - name: Check out repository code

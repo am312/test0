@@ -4,12 +4,16 @@ on:
   release:
     types: [published]
 env:
-  VERSION: ${{ github.event.release.name }}
+  TAG_NAME: ${{ github.event.release.tag_name }}
+  VER: ${{ TAG_NAME:1 }}
   REF: ${{ github.ref_name }}
 jobs:
   job-one:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "tagname $TAG_NAME"
+      - run: echo "ver $VER"
+      - run: echo "ref_name $REF"
       - run: echo "0 ${{ github.event.release.tag_name }}"
   job-two:
     runs-on: ubuntu-latest

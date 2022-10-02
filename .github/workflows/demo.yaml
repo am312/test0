@@ -12,6 +12,7 @@ jobs:
     steps:
       - run: echo "1refname $GITHUB_REF"
       - run: echo "2ref $GITHUB_REF_NAME"
+      - run: echo "2.1 ref ${{ github.ref_name }}"
       - run: echo "3🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "4rel name ${{ github.event.release.name }}"
       - run: echo "5event ref= ${{ github.event.ref }}"

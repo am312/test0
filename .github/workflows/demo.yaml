@@ -7,29 +7,14 @@ env:
   VERSION: ${{ github.event.release.name }}
   REF: ${{ github.ref_name }}
 jobs:
-  Explore-GitHub-Actions:
+  job-one:
     runs-on: ubuntu-latest
     steps:
       - run: echo "0 ${{ github.event.release.tag_name }}"
-      - run: echo "$GITHUB_REF##*/}"
-      - run: echo "1refname $GITHUB_REF"
-      - run: echo "2ref $GITHUB_REF_NAME"
-      - run: echo "2.1 ref ${{ github.ref_name }}"
-      - run: echo "3🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "4rel name ${{ github.event.release.name }}"
-      - run: echo "5event ref= ${{ github.event.ref }}"
-      - run: echo "6event ref-name= ${{ github.event.ref_name }}"
-      - run: echo "7event ref-type= ${{ github.ref_type }}"
-      - run: echo "8event ref-type= ${{ github.event.master_branch }}"
-      - run: echo "9🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "10🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+  job-two:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "1 ${{ github.event.release.tag_name }}"
+
 
 

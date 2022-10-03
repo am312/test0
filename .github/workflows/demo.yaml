@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Extract version from tag
-        run: echo "VERSION=$(echo $TAG_NAME)" >> $GITHUB_ENV
+        run: echo "VERSION=$(echo ${TAG_NAME})" >> $GITHUB_ENV
       - run: echo "tagname $TAG_NAME"
       - run: echo "ver $VERSION"
       - run: echo "ref_name $REF"

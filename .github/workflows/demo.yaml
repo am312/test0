@@ -16,24 +16,24 @@ jobs:
       githubEnv: $VERSION
   job-one:
     needs: set-version-variable
-    runs-on: [ubuntu-latest, "${{ needs.set-version-variable.githubEnv }}"]
+    runs-on: ubuntu-latest
     steps:
       - run: echo "tagname $TAG_NAME"
       - run: echo "ver $VERSION"
       - run: echo "ver2 $VERSION2"
       - run: echo "ref_name $REF"
-      - run: echo "0 ${{ needs.set-version-variable.githubEnv }}"
-      - run: echo "envi ${{ env.VERSION }}"
+      - run: echo "0 ${{ needs.set-version-variable.outputs.githubEnv }}"
+#       - run: echo "envi ${{ env.VERSION }}"
   job-two:
     needs: set-version-variable
-    runs-on: [ubuntu-latest, "${{ needs.set-version-variable.githubEnv }}"]
+    runs-on: ubuntu-latest
     steps:
       - run: echo "tagname $TAG_NAME"
       - run: echo "ver $VERSION"
       - run: echo "ver2 $VERSION2"
       - run: echo "ref_name $REF"
-      - run: echo "0 ${{ needs.set-version-variable.githubEnv }}"
-      - run: echo "envi ${{ env.VERSION }}"
+      - run: echo "0 ${{ needs.set-version-variable.outputs.githubEnv }}"
+#       - run: echo "envi ${{ env.VERSION }}"
 
 
 

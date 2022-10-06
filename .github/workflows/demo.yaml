@@ -12,25 +12,27 @@ jobs:
     steps:
       - name: Strip leading 'v' from tag, if present
         run: echo "VERSION=$(echo ${TAG_NAME/#v/})" >> $GITHUB_ENV
+    outputs:
+      githubEnv: $GITHUB_ENV
   job-one:
-    runs-on: ubuntu-latest
     needs: set-version-variable
+    runs-on: [ubuntu-latest, "${{ needs.set-version-variable.githubEnv }}"]
     steps:
       - run: echo "tagname $TAG_NAME"
       - run: echo "ver $VERSION"
       - run: echo "ver2 $VERSION2"
       - run: echo "ref_name $REF"
-      - run: echo "0 ${{ github.event.release.tag_name }}"
+      - run: echo "0 ${{ needs.set-version-variable.githubEnv }}"
       - run: echo "envi ${{ env.VERSION }}"
   job-two:
-    runs-on: ubuntu-latest
     needs: set-version-variable
+    runs-on: [ubuntu-latest, "${{ needs.set-version-variable.githubEnv }}"]
     steps:
       - run: echo "tagname $TAG_NAME"
       - run: echo "ver $VERSION"
       - run: echo "ver2 $VERSION2"
       - run: echo "ref_name $REF"
-      - run: echo "0 ${{ github.event.release.tag_name }}"
+      - run: echo "0 ${{ needs.set-version-variable.githubEnv }}"
       - run: echo "envi ${{ env.VERSION }}"
 
 

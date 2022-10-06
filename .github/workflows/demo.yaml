@@ -11,7 +11,10 @@ jobs:
       TAG_NAME: ${{ github.event.release.tag_name }}
     steps:
       - name: Strip leading 'v' from tag, if present, and store in VERSION
-        run: VERSION=$(echo ${TAG_NAME/#v/})
+        run: |
+          VERSION=$(echo ${TAG_NAME/#v/})
+          echo "This is version $VERSION"
+          echo "This is github tag $TAG_NAME"
     outputs:
       githubEnv: $VERSION
   job-one:

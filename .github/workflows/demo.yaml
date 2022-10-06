@@ -37,8 +37,9 @@ jobs:
     steps:
       - run: echo "test before"
       - run: echo ${{needs.set-version-variable.outputs.githubEnv}}
-      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.githubEnv}}"
-      - run: echo "VERSION IS NOW $VERSION"
+      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.githubEnv}} >> $GITHUB_ENV"
+      - run: echo "version $VERSION"
+      - run: echo "personal test ${{VERSION}}
       - run: echo "test"
 #       - run: echo "tagname $TAG_NAME"
 #       - run: echo "ver $VERSION"

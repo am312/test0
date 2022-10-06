@@ -18,15 +18,15 @@ jobs:
           # run: echo "VERSION=$(echo ${TAG_NAME/#v/})" >> $GITHUB_ENV
           # run: echo "VERSION=${TAG_NAME#v}" >> $GITHUB_ENV
     outputs:
-      githubEnv: ${{ steps.version_name.outputs.version }}
+      ver: ${{ steps.version_name.outputs.version }}
       
   job-one:
     needs: set-version-variable
     runs-on: ubuntu-latest
     steps:
       - run: echo "test before"
-      - run: echo ${{needs.set-version-variable.outputs.githubEnv}}
-      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.githubEnv}}"
+      - run: echo ${{needs.set-version-variable.outputs.ver}}
+      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.ver}}"
       - run: echo "VERSION IS NOW $VERSION"
       - run: echo "test"
 #         - run: echo "tagname $TAG_NAME"
@@ -39,8 +39,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "test before"
-      - run: echo ${{needs.set-version-variable.outputs.githubEnv}}
-      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.githubEnv}} >> $GITHUB_ENV"
+      - run: echo ${{needs.set-version-variable.outputs.ver}}
+      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.ver}} >> $GITHUB_ENV"
       - run: echo "version $VERSION"
 #      - run: echo "personal test ${{VERSION}}
       - run: echo "test"

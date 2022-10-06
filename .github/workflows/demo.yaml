@@ -22,8 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "test before"
-      - run: echo ${{needs.set-version-variable.outputs.version}}
-      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.version}}"
+      - run: echo ${{needs.set-version-variable.outputs.githubEnv}}
+      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.githubEnv}}"
       - run: echo "VERSION IS NOW $VERSION"
       - run: echo "test"
 #         - run: echo "tagname $TAG_NAME"
@@ -36,8 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "test before"
-      - run: echo ${{needs.set-version-variable.outputs.version}}
-      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.version}}"
+      - run: echo ${{needs.set-version-variable.outputs.githubEnv}}
+      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.githubEnv}}"
       - run: echo "VERSION IS NOW $VERSION"
       - run: echo "test"
 #       - run: echo "tagname $TAG_NAME"

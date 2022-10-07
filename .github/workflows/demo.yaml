@@ -11,10 +11,9 @@ jobs:
       TAG_NAME: ${{ github.event.release.tag_name }}
       RELEASE_NAME: ${{ github.event.release.name }}
     steps:
-      - uses: tubone24/update_release@v1.3.1
       
       - name: Strip leading 'v' from tag, if present, and store in VERSION
-      - id: version_name
+        id: version_name
         run: |
          # echo "::set-output name=version::$(echo ${TAG_NAME#v})"
           echo "Release name is currently $RELEASE_NAME"

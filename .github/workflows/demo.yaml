@@ -11,7 +11,9 @@ jobs:
       TAG_NAME: ${{ github.event.release.tag_name }}
       RELEASE_NAME: ${{ github.event.release.name }}
     steps:
-      
+      - name: Update GitHub Release
+        uses: tubone24/update_release@v1.3.1
+
       - name: Strip leading 'v' from tag, if present, and store in VERSION
         id: version_name
         run: |
@@ -22,7 +24,7 @@ jobs:
         
       - name: Update release name
         id: update_release
-        uses: turbone24/update-release@v1.0
+        uses: turbone24/update-release@v1.3.1
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:

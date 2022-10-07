@@ -9,18 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TAG_NAME: ${{ github.event.release.tag_name }}
-      RELEASE_NAME: ${{ github.event.release.name }}
     steps:
-#       - name: Update GitHub Release
-#         uses: tubone24/update_release@v1.3.1
-
       - name: Strip leading 'v' from tag, if present, and store in VERSION
         id: version_name
         run: |
-         # echo "::set-output name=version::$(echo ${TAG_NAME#v})"
-          echo "Release name is currently $RELEASE_NAME"
-          echo "VERSION=$(echo ${TAG_NAME/#v/})"
-          echo "::set-output name=version::${VERSION}"
+          echo "::set-output name=version::$(echo ${TAG_NAME#v})"
         
       - name: Update release name
         id: update_release
@@ -28,13 +21,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          release_name: ${VERSION}
+          release_name: $(echo ${TAG_NAME#v})
           
       - name: tester
         run: | 
           echo "release name is now... ${{ github.event.release.name }}"
-          echo "another test: $RELEASE_NAME"
-      
+          
     outputs:
       ver: ${{ steps.version_name.outputs.version }}
       

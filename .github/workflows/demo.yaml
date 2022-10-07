@@ -15,7 +15,7 @@ jobs:
         run: |
           echo "::set-output name=version::$(echo ${TAG_NAME#v})"
           echo "VERSION=$(echo ${TAG_NAME/#v/})" >> $GITHUB_ENV
-          echo "Version is now ${VERSION}"
+          echo "Version is now ${{ VERSION }}"
         
       - name: Update release name
         id: update_release
@@ -23,12 +23,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          release_name: ${VERSION}
+          release_name: ${{ VERSION }}
           
-      - name: tester
-        run: | 
-          echo "release name is now... ${{ github.event.release.name }}"
-          echo "release should be this... $(echo ${TAG_NAME#v})"
+#       - name: tester
+#         run: | 
+#           echo "release name is now... ${{ github.event.release.name }}"
+#           echo "release should be this... $(echo ${TAG_NAME#v})"
           
     outputs:
       ver: ${{ steps.version_name.outputs.version }}

@@ -15,7 +15,7 @@ jobs:
         run: |
           echo "::set-output name=version::$(echo ${TAG_NAME#v})"
           echo "VERSION=$(echo ${TAG_NAME/#v/})" >> $GITHUB_ENV
-          echo "Version is now ${{ VERSION }}"
+          echo "Version is now ${{ env.VERSION }}"
         
       - name: Update release name
         id: update_release
@@ -23,7 +23,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          release_name: "${{ VERSION }}"
+          release_name: "${{ env.VERSION }}"
           
 #       - name: tester
 #         run: | 

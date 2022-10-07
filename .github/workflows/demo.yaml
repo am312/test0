@@ -23,11 +23,14 @@ jobs:
   job-one:
     needs: set-version-variable
     runs-on: ubuntu-latest
+    env:
+      VERSION: ${{needs.set-version-variable.outputs.ver}}
     steps:
       - run: echo "test before"
-      - run: echo ${{needs.set-version-variable.outputs.ver}}
-      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.ver}}"
-      - run: echo "VERSION IS NOW $VERSION"
+#       - run: echo ${{needs.set-version-variable.outputs.ver}}
+#       - run: echo "$VERSION = ${{needs.set-version-variable.outputs.ver}}"
+      - run: echo "VERSION IS NOW ${{VERSION}}"
+      - run: echo "second version test (no brackets) $VERSION"
       - run: echo "test"
 #         - run: echo "tagname $TAG_NAME"
 #         - run: echo "ver $VERSION"
@@ -37,12 +40,13 @@ jobs:
   job-two:
     needs: set-version-variable
     runs-on: ubuntu-latest
+    env:
+      VERSION: ${{needs.set-version-variable.outputs.ver}}
     steps:
       - run: echo "test before"
-      - run: echo ${{needs.set-version-variable.outputs.ver}}
-      - run: echo "$VERSION = ${{needs.set-version-variable.outputs.ver}} >> $GITHUB_ENV"
-      - run: echo "version $VERSION"
-#      - run: echo "personal test ${{VERSION}}
+#       - run: echo ${{needs.set-version-variable.outputs.ver}}
+#       - run: echo "$VERSION = ${{needs.set-version-variable.outputs.ver}} >> $GITHUB_ENV"
+      - run: echo "one bracket version ${VERSION}"
       - run: echo "test"
 #       - run: echo "tagname $TAG_NAME"
 #       - run: echo "ver $VERSION"

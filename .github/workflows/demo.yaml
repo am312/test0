@@ -29,7 +29,7 @@ jobs:
       - run: echo "test before"
 #       - run: echo ${{needs.set-version-variable.outputs.ver}}
 #       - run: echo "$VERSION = ${{needs.set-version-variable.outputs.ver}}"
-      - run: echo "VERSION IS NOW ${{VERSION}}"
+      - run: echo "VERSION IS NOW ${VERSION}"
       - run: echo "second version test (no brackets) $VERSION"
       - run: echo "test"
 #         - run: echo "tagname $TAG_NAME"

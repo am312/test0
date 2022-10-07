@@ -33,7 +33,7 @@ jobs:
       - name: tester
         run: | 
           echo "release name is now... ${{ github.event.release.name }}"
-          echo "another test: $RELEASE_NAME
+          echo "another test: $RELEASE_NAME"
       
     outputs:
       ver: ${{ steps.version_name.outputs.version }}

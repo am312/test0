@@ -19,17 +19,17 @@ jobs:
           
           
       - name: test 1
-        if: $RELEASE_NAME != Null 
+        if: ${RELEASE_NAME} != Null 
         run: |
           echo "Release name is not null." 
           
       - name: test 2
-        if: $RELEASE_NAME != env.VERSION 
+        if: ${RELEASE_NAME} != ${{ env.VERSION }}
         run: |
           echo "Release name not equal to env version". 
           
       - name: If release name set, verify it corresponds correctly to tag
-        if: $RELEASE_NAME != Null && $RELEASE_NAME != env.VERSION 
+        if: ${RELEASE_NAME} != Null && ${RELEASE_NAME} != ${{ env.VERSION }}
         run: |
           echo "Release name is not null and the release name is not equivalent to env version. 
           

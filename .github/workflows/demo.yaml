@@ -30,7 +30,7 @@ jobs:
       - name: If release name set, verify it corresponds correctly to tag
         if: ${{ github.event.release.name }} != Null && ${{ github.event.release.name }} != ${{ env.VERSION }}
         run: |
-          echo "Release name is not null and the release name is not equivalent to env version. 
+          echo "Release name is not null and the release name is not equivalent to env version."
           
         
         

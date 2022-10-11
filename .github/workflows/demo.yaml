@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TAG_NAME: ${{ github.event.release.tag_name }}
-      RELEASE_NAME: ${{ github.event.release.name }} 
     steps:
       - name: Strip leading 'v' from tag, if present, and store in VERSION
         id: version_name
@@ -19,17 +18,17 @@ jobs:
           
           
       - name: test 1
-        if: ${RELEASE_NAME} != Null 
+        if: ${{ github.event.release.name }}  != Null 
         run: |
           echo "Release name is not null." 
           
       - name: test 2
-        if: ${RELEASE_NAME} != ${{ env.VERSION }}
+        if: ${{ github.event.release.name }} != ${{ env.VERSION }}
         run: |
           echo "Release name not equal to env version". 
           
       - name: If release name set, verify it corresponds correctly to tag
-        if: ${RELEASE_NAME} != Null && ${RELEASE_NAME} != ${{ env.VERSION }}
+        if: ${{ github.event.release.name }} != Null && ${{ github.event.release.name }} != ${{ env.VERSION }}
         run: |
           echo "Release name is not null and the release name is not equivalent to env version. 
           

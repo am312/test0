@@ -23,11 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           release_name: "${{ env.VERSION }}"
-          
-      - name: tester
-        run: | 
-          echo "release name is now... ${{ github.event.release.name }}"
-          
+                    
     outputs:
       ver: ${{ steps.version_name.outputs.version }}
       
@@ -37,18 +33,18 @@ jobs:
     env:
       VERSION: ${{needs.set-version-variable.outputs.ver}}
     steps:
-      - run: echo "test before"
       - run: echo "VERSION IS NOW ${VERSION}"
-      - run: echo "test"
+      
   job-two:
     needs: set-version-variable
     runs-on: ubuntu-latest
     env:
       VERSION: ${{needs.set-version-variable.outputs.ver}}
     steps:
-      - run: echo "test before"
-      - run: echo "one bracket version ${VERSION}"
-      - run: echo "test"
+      - run: |
+          echo "no bracket $VERSION"
+          echo https://oss.sonatype.org/service/local/repositories/releases/content/com/datadoghq/dd-trace-ot/$VERSION/dd-trace-ot-$VERSION.jar
+      
 
 
 

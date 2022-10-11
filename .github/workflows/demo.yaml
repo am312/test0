@@ -16,7 +16,7 @@ jobs:
           echo "::set-output name=version::$(echo ${TAG_NAME#v})"
           echo "VERSION=$(echo ${TAG_NAME/#v/})" >> $GITHUB_ENV
           
-      - name: If release name is set, verify that it corresponds correctly to tag, else fail
+      - name: If release name is set and does not correspond correctly to tag, exit.
         if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION }}
         run: |
           echo "Release name not equivilant to the version!"

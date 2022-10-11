@@ -16,27 +16,12 @@ jobs:
           echo "::set-output name=version::$(echo ${TAG_NAME#v})"
           echo "VERSION=$(echo ${TAG_NAME/#v/})" >> $GITHUB_ENV
           
-          
-      - name: test 1
-        if: ${{ github.event.release.name == '' }}  
-        run: |
-          echo "Release name is null." 
-          
-      - name: test 2
-        if: ${{ github.event.release.name != env.VERSION }}
-        run: |
-          echo "Release name not equal to env version". 
-          echo "${{ github.event.release.name }}"
-          echo "${{ env.VERSION }}"
-          echo "aaa"
-          
-      - name: If release name set, verify it corresponds correctly to tag
+      - name: If release name is set, verify that it corresponds correctly to tag, else fail
         if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION }}
         run: |
-          echo "Release name is not empty and release name is not equivalent to version."
+          echo "Release name not equivilant to the version!"
           echo "Failing job."
           exit 1
-          
         
       - name: Update release name
         id: update_release

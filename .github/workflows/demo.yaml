@@ -18,12 +18,12 @@ jobs:
           
           
       - name: test 1
-        if: ${{ github.event.release.name }}  != Null 
+        if: ${{ github.event.release.name == Null }}  
         run: |
-          echo "Release name is not null." 
+          echo "Release name is null." 
           
       - name: test 2
-        if: ${{ github.event.release.name }} != ${{ env.VERSION }}
+        if: ${{ github.event.release.name != env.VERSION }}
         run: |
           echo "Release name not equal to env version". 
           echo "${{ github.event.release.name }}"

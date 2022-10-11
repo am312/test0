@@ -26,7 +26,7 @@ jobs:
         if: ${{ github.event.release.name }} != ${{ env.VERSION }}
         run: |
           echo "Release name not equal to env version". 
-          echo "${{ github.event.release.name }} 
+          echo "${{ github.event.release.name }}"
           echo "${{ env.VERSION }}"
           echo "aaa"
           

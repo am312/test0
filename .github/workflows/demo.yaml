@@ -28,7 +28,9 @@ jobs:
           echo "This is version $VERSION"
           echo $( echo v${VERSION})
           echo "VERSIONED_RELEASE=$( echo v${VERSION})" >> $GITHUB_ENV
-          echo "${{ env.VERSIONED_RELEASE }}"
+          echo "versioned release is ${{ env.VERSIONED_RELEASE }}"
+          echo " not using env is ${{ VERSIONED_RELEASE }}" 
+          echo ${{ env.VERSIONED_RELEASE }}
     
       - name: If release name is set and does not correspond correctly to tag, exit.
         if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION && github.event.release.name != env.VERSIONED_RELEASE}}

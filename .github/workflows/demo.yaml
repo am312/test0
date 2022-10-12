@@ -22,15 +22,13 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       VERSION: ${{needs.get-version.outputs.ver}}
-      VERSIONED_RELEASE: ${{ echo v${env.VERSION}) }}
     steps:
       - name: Prepare versioned release for comparison
         run: |
-          echo "versioned release is ${{ env.VERSIONED_RELEASE }}"
-          echo "no env ${VERSIONED_RELEASE}"
+          echo ${{ $(echo v${env.VERSION}) }}
     
       - name: If release name is set and does not correspond correctly to tag, exit.
-        if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION && github.event.release.name != env.VERSIONED_RELEASE}}
+        if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION && github.event.release.name != $(echo v${env.VERSION})}}
         run: |
           echo "Release name not equivilant to the version!"
           echo "Failing job."

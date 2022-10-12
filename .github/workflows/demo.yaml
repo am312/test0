@@ -25,10 +25,10 @@ jobs:
     steps:
       - name: Prepare versioned release for comparison
         run: |
-          echo ${{ $(echo v${env.VERSION}) }}
+          echo ${{ $(${env.VERSION}) }}
     
       - name: If release name is set and does not correspond correctly to tag, exit.
-        if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION && github.event.release.name != $(echo v${env.VERSION})}}
+        if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION && github.event.release.name != $(v${env.VERSION}) }}
         run: |
           echo "Release name not equivilant to the version!"
           echo "Failing job."

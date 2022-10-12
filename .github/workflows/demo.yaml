@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       VERSION: ${{needs.get-version.outputs.ver}}
-      VERSIONED_RELEASE: $( echo v${VERSION})
+      VERSIONED_RELEASE: ${{ echo v${env.VERSION}) }}
     steps:
       - name: Prepare versioned release for comparison
         run: |

@@ -26,8 +26,8 @@ jobs:
       - name: Prepare versioned release for comparison
         run: |
           echo "This is version $VERSION"
-          echo "${v/VERSION}"
-          echo "VERSIONED_RELEASE=v$VERSION" >> $GITHUB_ENV
+          echo $( echo v${VERSION})
+          echo "VERSIONED_RELEASE=$( echo v${VERSION})" >> $GITHUB_ENV
           echo "${{ env.VERSIONED_RELEASE }}"
     
       - name: If release name is set and does not correspond correctly to tag, exit.

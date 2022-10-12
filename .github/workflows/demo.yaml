@@ -27,11 +27,11 @@ jobs:
         run: |
           echo "This is version $VERSION"
           echo $( echo v${VERSION})
-          echo "VERSIONED_RELEASE=$( echo v${VERSION})" >> $GITHUB_ENV
-          echo "versioned release is ${{ env.VERSIONED_RELEASE }}"
+          echo "V_RELEASE=$( echo v${VERSION})" >> $GITHUB_ENV
+          echo "versioned release is ${{ env.V_RELEASE }}"
     
       - name: If release name is set and does not correspond correctly to tag, exit.
-        if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION && github.event.release.name != env.VERSIONED_RELEASE}}
+        if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION && github.event.release.name != env.V_RELEASE}}
         run: |
           echo "Release name not equivilant to the version!"
           echo "Failing job."

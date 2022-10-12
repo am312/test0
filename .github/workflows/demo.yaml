@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: Strip leading 'v' from tag and return as output
         id: version_name
-        run: |
-          echo "::set-output name=version::$(echo ${TAG_NAME/#v/})"
+        run: echo "version=$(echo ${TAG_NAME/#v/})" >> $GITHUB_OUTPUT
+#           echo "::set-output name=version::$(echo ${TAG_NAME/#v/})"
     outputs:
       ver: ${{ steps.version_name.outputs.version }}
       
@@ -22,13 +22,14 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       VERSION: ${{needs.get-version.outputs.ver}}
+      VERSIONED_RELEASE: ${v${{github.event.release.tag_name}}}
     steps:
       - name: Prepare versioned release for comparison
         run: |
-          echo ${{ $(${env.VERSION}) }}
+          echo ${{ env.VERSIONED_RELEASED }}
     
       - name: If release name is set and does not correspond correctly to tag, exit.
-        if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION && github.event.release.name != $(v${env.VERSION}) }}
+        if: ${{ github.event.release.name != '' && github.event.release.name != env.VERSION && github.event.release.name != env.VERSIONED_RELEASE }}
         run: |
           echo "Release name not equivilant to the version!"
           echo "Failing job."

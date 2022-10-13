@@ -23,6 +23,8 @@ jobs:
     env: 
       VERSION: ${{needs.get-version.outputs.ver}}
       VERSIONED_RELEASE: v${{needs.get-version.outputs.ver}}
+      RELEASE_ID: ${{ github.event.release.id }}
+
     steps:
       
 #       - name: little test. 
@@ -65,6 +67,8 @@ jobs:
         with:
           script: |
             console.log("Hello world test")
+            const { dummy, dummy2, RELEASE_ID } = process.env
+            console.log(`${RELEASE_ID} is release id... I think`)
             
 
   job-one:

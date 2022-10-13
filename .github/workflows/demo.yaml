@@ -51,18 +51,18 @@ jobs:
       ver: ${{ steps.version_name.outputs.version }}
       
   job-one:
-    needs: test-and-set-version
+    needs: [get-version, test-and-set-version]
     runs-on: ubuntu-latest
     env:
-      VERSION: ${{needs.test-and-set-version.outputs.ver}}
+      VERSION: ${{needs.get-version.outputs.ver}}
     steps:
       - run: echo "VERSION IS NOW ${VERSION}"
       
   job-two:
-    needs: test-and-set-version
+    needs: [get-version, test-and-set-version]
     runs-on: ubuntu-latest
     env:
-      VERSION: ${{needs.test-and-set-version.outputs.ver}}
+      VERSION: ${{needs.get-version.outputs.ver}}
     steps:
       - run: |
           echo "no bracket $VERSION"

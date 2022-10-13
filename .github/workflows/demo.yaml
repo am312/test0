@@ -73,7 +73,7 @@ jobs:
             octokit.rest.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: '79796328'
+              release_id: '79796328',
               name: 'Some New Name'
             })  
             

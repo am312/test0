@@ -45,21 +45,27 @@ jobs:
 #         with:
 #           release_name: "${{ env.VERSION }}"
 
-      - name: update release name
+#       - name: update release name
+#         uses: actions/github-script@v6
+#         env:
+#           RELEASE_ID: ${{ github.event.release.id }}
+#         with:
+#           script: |
+#             const { RELEASE_ID } = process.env
+#             console.log(`${RELEASE_ID} is the release id `)
+#             octokit.rest.repos.updateRelease({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               release_id: `${RELEASE_ID}`
+#               name: 'Some New Name'
+#             })  
+#             console.log("success?")
+      - name: Script test
         uses: actions/github-script@v6
-        env:
-          RELEASE_ID: ${{ github.event.release.id }}
         with:
           script: |
-            const { RELEASE_ID } = process.env
-            console.log(`${RELEASE_ID} is the release id `)
-            octokit.rest.repos.updateRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: `${RELEASE_ID}`
-              name: 'Some New Name'
-            })  
-            console.log("success?")
+            console.log("Hello world test")
+            
 
   job-one:
     needs: get-version

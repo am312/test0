@@ -23,6 +23,7 @@ jobs:
     env: 
       VERSION: ${{needs.get-version.outputs.ver}}
       VERSIONED_RELEASE: v${{needs.get-version.outputs.ver}}
+      RELEASE_ID: ${{ github.event.release.id }}
     steps:
       - name: little test. 
         run: |
@@ -48,12 +49,15 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const { VERSION, VERSIONED_RELEASE, RELEASE_ID } = process.env
+            console.log(`${RELEASE_ID} is the release id `)
             octokit.rest.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: ${{ github.event.release.id }}  
+              release_id: ${RELEASE_ID}
               name: 'Some New Name'
             })  
+            console.log("success?")
 
   job-one:
     needs: get-version

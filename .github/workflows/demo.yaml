@@ -70,10 +70,11 @@ jobs:
             console.log("Hello world test")
             const { dummy, dummy2, RELEASE_ID } = process.env
             console.log(`${RELEASE_ID} is release id... I think`)
-            octokit.rest.repos.updateRelease({
+            
+            github.rest.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: '79796328',
+              release_id: `${RELEASE_ID}`,
               name: 'Some New Name'
             })  
             
